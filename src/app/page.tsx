@@ -6,9 +6,18 @@ export default async function Home() {
       method: 'GET',
     });
     const { colors } = await response?.json();
-    return colors.colors;
+    return colors;
   }
   const colors = await getColors();
+
+  async function getColor() {
+    const response = await fetch('http://localhost:3000/api/colors/AliceBlue', {
+      method: 'GET',
+    });
+    const data = await response?.json();
+    return data;
+  }
+  const color = await getColor();
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
