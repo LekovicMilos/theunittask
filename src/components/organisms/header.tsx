@@ -12,7 +12,7 @@ export default function Header() {
   return (
     <header className="flex h-14 items-center justify-between gap-4 border-b bg-gray-100/40 px-6 dark:bg-gray-800/40 lg:h-[60px]">
       <Link className="flex items-center gap-2 font-semibold" href="/">
-        The unit technical task
+        THE UNIT technical task
       </Link>
       <nav className="hidden items-start px-4 text-sm font-medium lg:flex">
         <NavItem href="/">Dashboard</NavItem>
