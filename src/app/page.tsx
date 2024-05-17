@@ -3,7 +3,7 @@ import { DataTable } from '@/components/organisms/data-table';
 
 export default async function Home() {
   async function getColors() {
-    const response = await fetch('http://localhost:3000/api/colors', {
+    const response = await fetch(`${process.env.ENV_VARIABLE}/api/colors`, {
       method: 'GET',
     });
     const { colors } = await response.json();
