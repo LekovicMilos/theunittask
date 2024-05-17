@@ -1,7 +1,7 @@
 import { Color } from '@/components/organisms/data-table';
 
 export async function GET(request: Request) {
-  console.log(request)
+  console.log(request);
   const res = await fetch(`https://www.csscolorsapi.com/api/colors`, {
     method: 'GET',
   });

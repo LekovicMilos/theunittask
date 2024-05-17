@@ -7,10 +7,12 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'prettier',
   ],
-  plugins: ['react', '@typescript-eslint'],
+  plugins: ['react', '@typescript-eslint/eslint-plugin'],
   parserOptions: {
     ecmaVersion: 2021,
     sourceType: 'module',
   },
-  rules: {},
+  rules: {
+    'react/prop-types': 'off',
+  },
 };

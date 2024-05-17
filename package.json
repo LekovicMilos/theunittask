@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint . --ignore-pattern 'src/components/ui/*' 'src/components/organisms/*'",
+    "lint": "eslint . --ignore-pattern 'src/components/organisms/table-header.tsx'",
     "format": "prettier --write ."
   },
   "dependencies": {

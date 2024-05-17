@@ -1,6 +1,6 @@
 'use client';
 
-import React  from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { NavItem } from '@/components/atoms/nav-item';
 import {
