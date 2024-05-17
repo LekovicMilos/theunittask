@@ -19,17 +19,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-            <Providers>
-      <body className={inter.className}>
-        <div className="grid min-h-screen w-full">
-          <div className="flex flex-col">
-            <Header />
+      <Providers>
+        <body className={inter.className}>
+          <div className="grid min-h-screen w-full">
+            <div className="flex flex-col">
+              <Header />
               {children}
-            <Toaster />
+              <Toaster />
+            </div>
           </div>
-        </div>
-      </body>
-            </Providers>
+        </body>
+      </Providers>
     </html>
   );
 }

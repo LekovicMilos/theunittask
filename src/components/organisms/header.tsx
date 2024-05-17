@@ -21,7 +21,9 @@ export default function Header() {
       </nav>
       <nav className="grid items-start px-4 text-sm font-medium lg:hidden">
         <DropdownMenu>
-          <DropdownMenuTrigger><Bars3Icon className="mr-2 h-4 w-4" /></DropdownMenuTrigger>
+          <DropdownMenuTrigger>
+            <Bars3Icon className="mr-2 h-4 w-4" />
+          </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuItem asChild>
               <NavItem href="/">Dashboard</NavItem>

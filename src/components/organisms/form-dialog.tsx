@@ -22,8 +22,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { toast } from '@/components/ui/use-toast';
 import { z } from 'zod';
-import { useDispatch } from "react-redux";
-import { addColor } from "@/redux/slices/colorsSlice";
+import { useDispatch } from 'react-redux';
+import { addColor } from '@/redux/slices/colorsSlice';
 
 interface FormDialogProps {
   isModalOpen: boolean;
@@ -58,10 +58,12 @@ const FormDialog: React.FC<FormDialogProps> = ({ isModalOpen, setIsModalOpen }) 
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     setIsModalOpen(false);
-    dispatch(addColor({
-      name: data.name,
-      hex: data.hex
-    }));
+    dispatch(
+      addColor({
+        name: data.name,
+        hex: data.hex,
+      }),
+    );
     form.reset();
     toast({
       title: 'You submitted the following values:',

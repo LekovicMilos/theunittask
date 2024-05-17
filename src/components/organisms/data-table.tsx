@@ -18,15 +18,15 @@ import DeleteDialog from '@/components/organisms/delete-dialog';
 import FormDialog from '@/components/organisms/form-dialog';
 import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table';
-import { useSelector, useDispatch } from "react-redux";
-import { addColors } from "@/redux/slices/colorsSlice";
+import { useSelector, useDispatch } from 'react-redux';
+import { addColors } from '@/redux/slices/colorsSlice';
 
 export type Color = {
   name: string;
   hex: string;
 };
 
-export function DataTable({ data }) {
+export function DataTable({ data }: { data: Color[] }) {
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(addColors(data));
@@ -34,7 +34,7 @@ export function DataTable({ data }) {
   const colors = useSelector((state: any) => state.colors);
   const [deleteColor, setDeleteColor] = React.useState<Color | null>(null);
 
-  const handleDelete = (color) => {
+  const handleDelete = (color: Color) => {
     setIsDeleteModalOpen(true);
     setDeleteColor(color);
   };
@@ -115,19 +115,19 @@ export function DataTable({ data }) {
           }}
           className="max-w-sm"
         />
-        <FormDialog
-          isModalOpen={isModalOpen}
-          setIsModalOpen={setIsModalOpen}
-        />
+        <FormDialog isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
       </div>
       <div className="rounded-md border">
         <DeleteDialog
           open={isDeleteModalOpen}
-          onOpenChange={setIsDeleteModalOpen}
+          onOpenChange={() => setIsDeleteModalOpen(!isDeleteModalOpen)}
           deleteColor={deleteColor}
         />
         <Table>
-          <TableHeader headerGroups={table.getHeaderGroups()} flexRender={flexRender} />
+          <TableHeader
+            headerGroups={table.getHeaderGroups()}
+            flexRender={(header, context) => flexRender(header, context) as JSX.Element}
+          />
           <TableBody>
             {filteredData.length ? (
               filteredData.map((row) => (

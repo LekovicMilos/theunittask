@@ -8,8 +8,8 @@ import {
   DialogDescription,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { useDispatch } from "react-redux";
-import { removeColor } from "@/redux/slices/colorsSlice";
+import { useDispatch } from 'react-redux';
+import { removeColor } from '@/redux/slices/colorsSlice';
 import { toast } from '@/components/ui/use-toast';
 
 interface DeleteDialogProps {
@@ -21,10 +21,10 @@ interface DeleteDialogProps {
 const DeleteDialog: React.FC<DeleteDialogProps> = ({ open, onOpenChange, deleteColor }) => {
   const dispatch = useDispatch();
   function onDelete(name: string) {
-    dispatch(removeColor(deleteColor.name))
-    onOpenChange(false);
+    dispatch(removeColor(deleteColor.name));
+    onOpenChange();
     toast({
-      title: `You successfully removed color ${deleteColor.name}!`
+      title: `You successfully removed color ${deleteColor.name}!`,
     });
   }
 
@@ -41,7 +41,9 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({ open, onOpenChange, deleteC
           <DialogClose asChild>
             <Button variant="outline">Cancel</Button>
           </DialogClose>
-          <Button type="submit" onClick={() => onDelete(deleteColor?.name)}>Delete</Button>
+          <Button type="submit" onClick={() => onDelete(deleteColor?.name)}>
+            Delete
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

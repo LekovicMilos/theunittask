@@ -2,15 +2,17 @@ import { TableHead, TableHeader as TableHeaderComponent, TableRow } from '@/comp
 
 interface TableHeaderProps {
   headerGroups: any[];
-  flexRender: (header: any, context: any) => JSX.Element;
+  flexRender: (header: any, context: any) => JSX.Element | undefined | null;
 }
 
 const TableHeader: React.FC<TableHeaderProps> = ({ headerGroups, flexRender }) => {
+  console.log('headerGroup.headers ', headerGroups);
   return (
     <TableHeaderComponent>
       {headerGroups.map((headerGroup) => (
         <TableRow key={headerGroup.id}>
-          {headerGroup.headers.map((header) => {
+          {headerGroup.headers.map((header: any) => {
+            // Add type annotation to 'header' parameter
             return (
               <TableHead key={header.id}>
                 {header.isPlaceholder
