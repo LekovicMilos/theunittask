@@ -1,7 +1,10 @@
 'use client';
 
 import * as React from 'react';
-import { TrashIcon } from '@heroicons/react/20/solid';
+import {
+  TrashIcon,
+  ArrowsUpDownIcon
+} from '@heroicons/react/20/solid';
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -50,19 +53,23 @@ export function DataTable({ data }: { data: Color[] }) {
   const columns: ColumnDef<Color>[] = [
     {
       accessorKey: 'name',
-      enableSorting: true,
-      header: 'Name',
-      // header: ({ column }) => {
-      //   return (
-      //     <Button
-      //       variant="ghost"
-      //       onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-      //     >
-      //       Name
-      //       <ArrowsUpDownIcon className="ml-2 h-4 w-4" />
-      //     </Button>
-      //   );
-      // },
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => {
+              if (column.getIsSorted() === 'desc') {
+                column.toggleSorting(false);
+              } else {
+                column.toggleSorting(true);
+              }
+            }}
+          >
+            Name
+            <ArrowsUpDownIcon className="ml-2 h-4 w-4" />
+          </Button>
+        );
+      },
       cell: ({ row }) => <div className="capitalize">{row.getValue('name')}</div>,
     },
     {
@@ -103,7 +110,7 @@ export function DataTable({ data }: { data: Color[] }) {
     },
   });
 
-  const filteredData = table.getFilteredRowModel().rows;
+  const filteredData = table.getSortedRowModel().rows;
 
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = React.useState(false);

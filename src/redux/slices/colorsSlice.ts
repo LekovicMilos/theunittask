@@ -8,15 +8,20 @@ const colorsSlice = createSlice({
   reducers: {
     addColors: (state, action) => {
       if (Array.isArray(action.payload)) {
-        state.push(...action.payload);
+        const newColors = action.payload.filter(
+          (color) => !state.some((c) => c.name === color.name),
+        );
+        state.push(...newColors);
       } else {
         console.error('Payload must be an array');
       }
     },
     addColor: (state, action: PayloadAction<Color>) => {
       const { name, hex } = action.payload;
-      state.push({ name, hex });
-      state.sort((a: Color, b: Color) => a.name.localeCompare(b.name)); // TODO: add right sorting
+      if (!state.some((color) => color.name === name)) {
+        state.push({ name, hex });
+        state.sort((a: Color, b: Color) => a.name.localeCompare(b.name)); // TODO: add right sorting
+      }
     },
     removeColor: (state, action: PayloadAction<string>) => {
       const name = action.payload;
