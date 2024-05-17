@@ -4,7 +4,7 @@ import React from 'react';
 
 export default function Page() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex min-h-screen flex-col items-center justify-between p-4 lg:p-24">
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm">
         <h1 className="text-4xl">About</h1>
         <h2 className="mb-4 text-lg">
@@ -16,6 +16,7 @@ export default function Page() {
         <li>Using shadcn component library</li>
         <li>Using redux for state management (adding and deleting colors)</li>
         <li>Listing colors in the table, adding, deleting and filtering colors</li>
+        <li>Color details dialog</li>
         <li>Validation while adding colors using zod</li>
         <li>Responsive design</li>
         <li>Using Eslint and Prettier for code quality and consistency</li>

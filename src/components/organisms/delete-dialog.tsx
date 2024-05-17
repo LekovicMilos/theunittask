@@ -23,7 +23,7 @@ interface DeleteDialogProps {
 const DeleteDialog: React.FC<DeleteDialogProps> = ({ open, onOpenChange, deleteColor }) => {
   const dispatch = useDispatch();
   function onDelete() {
-    dispatch(removeColor(deleteColor?.name || ""));
+    dispatch(removeColor(deleteColor?.name || ''));
     onOpenChange();
     toast({
       title: `You successfully removed color ${deleteColor?.name}!`,
@@ -41,9 +41,11 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({ open, onOpenChange, deleteC
         </DialogHeader>
         <DialogFooter>
           <DialogClose asChild>
-            <Button variant="outline">Cancel</Button>
+            <Button variant="outline" className="my-2">
+              Cancel
+            </Button>
           </DialogClose>
-          <Button type="submit" onClick={onDelete}>
+          <Button type="submit" onClick={onDelete} className="my-2">
             Delete
           </Button>
         </DialogFooter>

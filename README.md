@@ -37,6 +37,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - Using shadcn component library
 - Using redux for state management (adding and deleting colors)
 - Listing colors in the table, adding, deleting and filtering colors
+- Color details dialog
 - Validation while adding colors using zod
 - Responsive design
 - Using Eslint and Prettier for code quality and consistency

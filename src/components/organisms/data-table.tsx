@@ -15,6 +15,7 @@ import {
 import { Button } from '@/components/ui/button';
 import TableHeader from '@/components/organisms/table-header';
 import DeleteDialog from '@/components/organisms/delete-dialog';
+import DetailsDialog from '@/components/organisms/details-dialog';
 import FormDialog from '@/components/organisms/form-dialog';
 import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table';
@@ -37,8 +38,11 @@ export function DataTable({ data }: { data: Color[] }) {
   }, [data, dispatch]);
   const colors = useSelector((state: ReduxState) => state.colors);
   const [deleteColor, setDeleteColor] = React.useState<Color | null>(null);
+  const [selectedColor, setSelectedColor] = React.useState<string | null>(null);
 
-  const handleDelete = (color: Color) => {
+  const handleDelete = (e: React.MouseEvent, color: Color) => {
+    e.preventDefault();
+    e.stopPropagation();
     setIsDeleteModalOpen(true);
     setDeleteColor(color);
   };
@@ -74,7 +78,7 @@ export function DataTable({ data }: { data: Color[] }) {
           <Button
             variant="ghost"
             className="h-8 w-8 p-0"
-            onClick={() => handleDelete(row.original)}
+            onClick={(e) => handleDelete(e, row.original)}
           >
             <TrashIcon className="h-4 w-4" />
           </Button>
@@ -103,6 +107,12 @@ export function DataTable({ data }: { data: Color[] }) {
 
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = React.useState(false);
+  const [isDetailsModalOpen, setIsDetaisModalOpen] = React.useState(false);
+
+  const handleDetailsOpen = (color: string) => {
+    setSelectedColor(color);
+    setIsDetaisModalOpen(true);
+  };
 
   return (
     <div className="w-full">
@@ -115,7 +125,7 @@ export function DataTable({ data }: { data: Color[] }) {
             const filterValue = event.target.value;
             table.getColumn('name')?.setFilterValue(filterValue);
           }}
-          className="max-w-sm"
+          className="max-w-48 lg:max-w-xs"
         />
         <FormDialog isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
       </div>
@@ -125,6 +135,11 @@ export function DataTable({ data }: { data: Color[] }) {
           onOpenChange={() => setIsDeleteModalOpen(!isDeleteModalOpen)}
           deleteColor={deleteColor}
         />
+        <DetailsDialog
+          open={isDetailsModalOpen}
+          onOpenChange={() => setIsDetaisModalOpen(!isDetailsModalOpen)}
+          selectedColor={selectedColor}
+        />
         <Table>
           <TableHeader
             headerGroups={table.getHeaderGroups()}
@@ -133,7 +148,12 @@ export function DataTable({ data }: { data: Color[] }) {
           <TableBody>
             {filteredData.length ? (
               filteredData.map((row) => (
-                <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
+                <TableRow
+                  key={row.id}
+                  data-state={row.getIsSelected() && 'selected'}
+                  onClick={() => handleDetailsOpen(row.original.name)}
+                  className="cursor-pointer"
+                >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}

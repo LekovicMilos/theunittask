@@ -13,7 +13,6 @@ interface TableHeaderProps {
 }
 
 const TableHeader: React.FC<TableHeaderProps> = ({ headerGroups, flexRender }) => {
-  console.log('headerGroup.headers ', headerGroups);
   return (
     <TableHeaderComponent>
       {headerGroups.map((headerGroup) => (

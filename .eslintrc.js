@@ -14,6 +14,6 @@ module.exports = {
   },
   rules: {
     'react/prop-types': 'off',
-    "@typescript-eslint/no-explicit-any": "off"
+    '@typescript-eslint/no-explicit-any': 'off',
   },
 };

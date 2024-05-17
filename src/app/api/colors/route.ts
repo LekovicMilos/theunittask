@@ -4,6 +4,10 @@ export async function GET(request: Request) {
   console.log(request);
   const res = await fetch(`https://www.csscolorsapi.com/api/colors`, {
     method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
   });
   const colors = await res.json();
 
