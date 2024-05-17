@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-const initialState: any = [];
+import { Color } from '@/components/organisms/data-table';
+const initialState: Color[] = [];
 
 const colorsSlice = createSlice({
   name: 'colors',
@@ -13,14 +13,14 @@ const colorsSlice = createSlice({
         console.error('Payload must be an array');
       }
     },
-    addColor: (state, action: PayloadAction<any>) => {
+    addColor: (state, action: PayloadAction<Color>) => {
       const { name, hex } = action.payload;
       state.push({ name, hex });
-      state.sort((a, b) => a.name.localeCompare(b.name)); // TODO: add right sorting
+      state.sort((a: Color, b: Color) => a.name.localeCompare(b.name)); // TODO: add right sorting
     },
-    removeColor: (state, action: PayloadAction<any>) => {
+    removeColor: (state, action: PayloadAction<string>) => {
       const name = action.payload;
-      return state.filter((color: any) => color.name !== name);
+      return state.filter((color: Color) => color.name !== name);
     },
   },
 });

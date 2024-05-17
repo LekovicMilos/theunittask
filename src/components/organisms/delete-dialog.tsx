@@ -1,3 +1,4 @@
+import React  from 'react';
 import {
   Dialog,
   DialogTitle,
@@ -11,16 +12,17 @@ import { Button } from '@/components/ui/button';
 import { useDispatch } from 'react-redux';
 import { removeColor } from '@/redux/slices/colorsSlice';
 import { toast } from '@/components/ui/use-toast';
+import { Color } from '@/components/organisms/data-table';
 
 interface DeleteDialogProps {
   open: boolean;
   onOpenChange: () => void;
-  deleteColor: any;
+  deleteColor: Color;
 }
 
 const DeleteDialog: React.FC<DeleteDialogProps> = ({ open, onOpenChange, deleteColor }) => {
   const dispatch = useDispatch();
-  function onDelete(name: string) {
+  function onDelete() {
     dispatch(removeColor(deleteColor.name));
     onOpenChange();
     toast({
@@ -41,7 +43,7 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({ open, onOpenChange, deleteC
           <DialogClose asChild>
             <Button variant="outline">Cancel</Button>
           </DialogClose>
-          <Button type="submit" onClick={() => onDelete(deleteColor?.name)}>
+          <Button type="submit" onClick={onDelete}>
             Delete
           </Button>
         </DialogFooter>

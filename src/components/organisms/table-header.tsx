@@ -1,7 +1,14 @@
+import React  from 'react';
 import { TableHead, TableHeader as TableHeaderComponent, TableRow } from '@/components/ui/table';
 
+type HeaderGroupType = {
+  headers: any[];
+  depth: number;
+  id: string;
+}
+
 interface TableHeaderProps {
-  headerGroups: any[];
+  headerGroups: HeaderGroupType[];
   flexRender: (header: any, context: any) => JSX.Element | undefined | null;
 }
 

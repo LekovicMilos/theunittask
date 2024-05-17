@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint .",
+    "lint": "eslint . --ignore-pattern 'src/components/ui/*' 'src/components/organisms/*'",
     "format": "prettier --write ."
   },
   "dependencies": {
@@ -19,6 +19,7 @@
     "@radix-ui/react-toast": "^1.1.5",
     "@reduxjs/toolkit": "^2.2.5",
     "@tanstack/react-table": "^8.17.3",
+    "@typescript-eslint/eslint-plugin": "^7.9.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.378.0",

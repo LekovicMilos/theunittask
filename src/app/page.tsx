@@ -1,3 +1,4 @@
+import React from 'react';
 import { DataTable } from '@/components/organisms/data-table';
 
 export default async function Home() {
@@ -5,19 +6,18 @@ export default async function Home() {
     const response = await fetch('http://localhost:3000/api/colors', {
       method: 'GET',
     });
-    const { colors } = await response?.json();
+    const { colors } = await response.json();
     return colors;
   }
   const colors = await getColors();
 
-  async function getColor() {
-    const response = await fetch('http://localhost:3000/api/colors/AliceBlue', {
-      method: 'GET',
-    });
-    const data = await response?.json();
-    return data;
-  }
-  const color = await getColor();
+  // async function getColor() {
+  //   const response = await fetch('http://localhost:3000/api/colors/AliceBlue', {
+  //     method: 'GET',
+  //   });
+  //   const data = await response?.json();
+  //   return data;
+  // }
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">

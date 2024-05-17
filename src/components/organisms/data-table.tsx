@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { ArrowsUpDownIcon, TrashIcon } from '@heroicons/react/20/solid';
+import { TrashIcon } from '@heroicons/react/20/solid';
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -26,12 +26,16 @@ export type Color = {
   hex: string;
 };
 
+export type ReduxState = {
+  colors: Color[];
+};
+
 export function DataTable({ data }: { data: Color[] }) {
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(addColors(data));
-  }, [data]);
-  const colors = useSelector((state: any) => state.colors);
+  }, [data, dispatch]);
+  const colors = useSelector((state: ReduxState) => state.colors);
   const [deleteColor, setDeleteColor] = React.useState<Color | null>(null);
 
   const handleDelete = (color: Color) => {
@@ -66,8 +70,6 @@ export function DataTable({ data }: { data: Color[] }) {
       id: 'actions',
       enableHiding: false,
       cell: ({ row }) => {
-        const color = row.original;
-
         return (
           <Button
             variant="ghost"
