@@ -22,11 +22,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { toast } from '@/components/ui/use-toast';
 import { z } from 'zod';
+import { useDispatch } from "react-redux";
+import { addColor } from "@/redux/slices/colorsSlice";
 
 interface FormDialogProps {
   isModalOpen: boolean;
   setIsModalOpen: (isOpen: boolean) => void;
-  handleAdd: () => void;
 }
 
 const FormSchema = z.object({
@@ -44,7 +45,9 @@ const FormSchema = z.object({
   ),
 });
 
-const FormDialog: React.FC<FormDialogProps> = ({ isModalOpen, setIsModalOpen, handleAdd }) => {
+const FormDialog: React.FC<FormDialogProps> = ({ isModalOpen, setIsModalOpen }) => {
+  const dispatch = useDispatch();
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -55,6 +58,10 @@ const FormDialog: React.FC<FormDialogProps> = ({ isModalOpen, setIsModalOpen, ha
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     setIsModalOpen(false);
+    dispatch(addColor({
+      name: data.name,
+      hex: data.hex
+    }));
     form.reset();
     toast({
       title: 'You submitted the following values:',
@@ -69,7 +76,6 @@ const FormDialog: React.FC<FormDialogProps> = ({ isModalOpen, setIsModalOpen, ha
           className="ml-auto"
           onClick={() => {
             setIsModalOpen(true);
-            handleAdd();
           }}
         >
           <PlusIcon className="mr-2 h-4 w-4" /> Add

@@ -18,6 +18,8 @@ import DeleteDialog from '@/components/organisms/delete-dialog';
 import FormDialog from '@/components/organisms/form-dialog';
 import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table';
+import { useSelector, useDispatch } from "react-redux";
+import { addColors } from "@/redux/slices/colorsSlice";
 
 export type Color = {
   name: string;
@@ -25,15 +27,18 @@ export type Color = {
 };
 
 export function DataTable({ data }) {
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    dispatch(addColors(data));
+  }, [data]);
+  const colors = useSelector((state: any) => state.colors);
   const [deleteColor, setDeleteColor] = React.useState<Color | null>(null);
 
   const handleDelete = (color) => {
     setIsDeleteModalOpen(true);
     setDeleteColor(color);
   };
-  const handleAdd = () => {
-    console.log('add color');
-  };
+
   const columns: ColumnDef<Color>[] = [
     {
       accessorKey: 'name',
@@ -78,7 +83,7 @@ export function DataTable({ data }) {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
 
   const table = useReactTable({
-    data,
+    data: colors,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -111,14 +116,12 @@ export function DataTable({ data }) {
         <FormDialog
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
-          handleAdd={handleAdd}
         />
       </div>
       <div className="rounded-md border">
         <DeleteDialog
           open={isDeleteModalOpen}
           onOpenChange={setIsDeleteModalOpen}
-          onDelete={handleDelete}
           deleteColor={deleteColor}
         />
         <Table>
