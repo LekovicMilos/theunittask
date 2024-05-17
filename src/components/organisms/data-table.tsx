@@ -43,17 +43,18 @@ export function DataTable({ data }) {
     {
       accessorKey: 'name',
       enableSorting: true,
-      header: ({ column }) => {
-        return (
-          <Button
-            variant="ghost"
-            onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-          >
-            Name
-            <ArrowsUpDownIcon className="ml-2 h-4 w-4" />
-          </Button>
-        );
-      },
+      header: 'Name',
+      // header: ({ column }) => {
+      //   return (
+      //     <Button
+      //       variant="ghost"
+      //       onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+      //     >
+      //       Name
+      //       <ArrowsUpDownIcon className="ml-2 h-4 w-4" />
+      //     </Button>
+      //   );
+      // },
       cell: ({ row }) => <div className="capitalize">{row.getValue('name')}</div>,
     },
     {
@@ -103,6 +104,7 @@ export function DataTable({ data }) {
 
   return (
     <div className="w-full">
+      <h1 className="text-4xl">Dashboard</h1>
       <div className="flex items-center py-4">
         <Input
           placeholder="Filter color names..."

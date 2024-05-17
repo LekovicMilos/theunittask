@@ -7,6 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { Bars3Icon } from '@heroicons/react/20/solid';
 
 export default function Header() {
   return (
@@ -20,7 +21,7 @@ export default function Header() {
       </nav>
       <nav className="grid items-start px-4 text-sm font-medium lg:hidden">
         <DropdownMenu>
-          <DropdownMenuTrigger>Open</DropdownMenuTrigger>
+          <DropdownMenuTrigger><Bars3Icon className="mr-2 h-4 w-4" /></DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuItem asChild>
               <NavItem href="/">Dashboard</NavItem>
