@@ -17,16 +17,16 @@ import { Color } from '@/components/organisms/data-table';
 interface DeleteDialogProps {
   open: boolean;
   onOpenChange: () => void;
-  deleteColor: Color;
+  deleteColor: Color | null;
 }
 
 const DeleteDialog: React.FC<DeleteDialogProps> = ({ open, onOpenChange, deleteColor }) => {
   const dispatch = useDispatch();
   function onDelete() {
-    dispatch(removeColor(deleteColor.name));
+    dispatch(removeColor(deleteColor?.name || ""));
     onOpenChange();
     toast({
-      title: `You successfully removed color ${deleteColor.name}!`,
+      title: `You successfully removed color ${deleteColor?.name}!`,
     });
   }
 
