@@ -16,13 +16,11 @@ const Pagination: React.FC<PaginationProps> = ({
   handleNextPage,
 }) => (
   <div className="flex items-center justify-end space-x-2 py-4">
-    <span> Page {currentPage} of {totalPages} </span>
-    <Button
-      variant="outline"
-      size="sm"
-      onClick={handlePreviousPage}
-      disabled={currentPage === 1}
-    >
+    <span>
+      {' '}
+      Page {currentPage} of {totalPages}{' '}
+    </span>
+    <Button variant="outline" size="sm" onClick={handlePreviousPage} disabled={currentPage === 1}>
       Previous
     </Button>
     <Button

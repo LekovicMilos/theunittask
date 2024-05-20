@@ -1,10 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, MouseEvent } from 'react';
-import {
-  TrashIcon,
-  ArrowsUpDownIcon
-} from '@heroicons/react/20/solid';
+import { TrashIcon, ArrowsUpDownIcon } from '@heroicons/react/20/solid';
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -117,7 +114,8 @@ export function DataTable({ data }: { data: Color[] }) {
   const filteredData = table.getSortedRowModel().rows;
   const itemsPerPage = 10;
 
-  const { paginatedData, currentPage, totalPages, handlePreviousPage, handleNextPage } = usePagination(filteredData, itemsPerPage);
+  const { paginatedData, currentPage, totalPages, handlePreviousPage, handleNextPage } =
+    usePagination(filteredData, itemsPerPage);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -161,7 +159,7 @@ export function DataTable({ data }: { data: Color[] }) {
           />
           <TableBody>
             {paginatedData.length ? (
-              paginatedData.map(row => (
+              paginatedData.map((row) => (
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}
@@ -170,7 +168,10 @@ export function DataTable({ data }: { data: Color[] }) {
                 >
                   {/* @ts-expect-error: Expecting error */}
                   {row.getVisibleCells().map((cell, index) => (
-                    <TableCell key={cell.id} className={index === row.getVisibleCells().length - 1 ? "text-right" : ""}>
+                    <TableCell
+                      key={cell.id}
+                      className={index === row.getVisibleCells().length - 1 ? 'text-right' : ''}
+                    >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}
