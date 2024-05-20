@@ -67,10 +67,10 @@ describe('DataTable', () => {
 
   it('removes a row from the table when the delete button is clicked', async () => {
     expect(screen.queryByText('#FF0000')).toBeInTheDocument();
-    
+
     const deleteButtons = screen.getAllByTestId('delete-button');
     fireEvent.click(deleteButtons[0]);
-    
+
     const deleteButton = screen.getByTestId('delete');
     userEvent.click(deleteButton);
 
