@@ -1,6 +1,6 @@
 'use client';
 
-import * as React from 'react';
+import React, { useState, useEffect, MouseEvent } from 'react';
 import {
   TrashIcon,
   ArrowsUpDownIcon
@@ -11,19 +11,22 @@ import {
   SortingState,
   flexRender,
   getCoreRowModel,
+  getPaginationRowModel,
   getFilteredRowModel,
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
 import { Button } from '@/components/ui/button';
-import TableHeader from '@/components/organisms/table-header';
-import DeleteDialog from '@/components/organisms/delete-dialog';
-import DetailsDialog from '@/components/organisms/details-dialog';
-import FormDialog from '@/components/organisms/form-dialog';
+import TableHeader from '@/components/organisms/table/table-header';
+import DeleteDialog from '@/components/organisms/dialog/delete-dialog';
+import DetailsDialog from '@/components/organisms/dialog/details-dialog';
+import FormDialog from '@/components/organisms/dialog/form-dialog';
 import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table';
 import { useSelector, useDispatch } from 'react-redux';
 import { addColors } from '@/redux/slices/colorsSlice';
+import Pagination from '@/components/organisms/table/pagination';
+import { usePagination } from '@/components/organisms/table/hooks/usePagination';
 
 export type Color = {
   name: string;
@@ -36,14 +39,14 @@ export type ReduxState = {
 
 export function DataTable({ data }: { data: Color[] }) {
   const dispatch = useDispatch();
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(addColors(data));
   }, [data, dispatch]);
   const colors = useSelector((state: ReduxState) => state.colors);
-  const [deleteColor, setDeleteColor] = React.useState<Color | null>(null);
-  const [selectedColor, setSelectedColor] = React.useState<string | null>(null);
+  const [deleteColor, setDeleteColor] = useState<Color | null>(null);
+  const [selectedColor, setSelectedColor] = useState<string | null>(null);
 
-  const handleDelete = (e: React.MouseEvent, color: Color) => {
+  const handleDelete = (e: MouseEvent, color: Color) => {
     e.preventDefault();
     e.stopPropagation();
     setIsDeleteModalOpen(true);
@@ -93,8 +96,8 @@ export function DataTable({ data }: { data: Color[] }) {
       },
     },
   ];
-  const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
+  const [sorting, setSorting] = useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
   const table = useReactTable({
     data: colors,
@@ -102,6 +105,7 @@ export function DataTable({ data }: { data: Color[] }) {
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     state: {
@@ -111,10 +115,13 @@ export function DataTable({ data }: { data: Color[] }) {
   });
 
   const filteredData = table.getSortedRowModel().rows;
+  const itemsPerPage = 10;
 
-  const [isModalOpen, setIsModalOpen] = React.useState(false);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = React.useState(false);
-  const [isDetailsModalOpen, setIsDetaisModalOpen] = React.useState(false);
+  const { paginatedData, currentPage, totalPages, handlePreviousPage, handleNextPage } = usePagination(filteredData, itemsPerPage);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isDetailsModalOpen, setIsDetaisModalOpen] = useState(false);
 
   const handleDetailsOpen = (color: string) => {
     setSelectedColor(color);
@@ -153,16 +160,17 @@ export function DataTable({ data }: { data: Color[] }) {
             flexRender={(header, context) => flexRender(header, context) as JSX.Element}
           />
           <TableBody>
-            {filteredData.length ? (
-              filteredData.map((row) => (
+            {paginatedData.length ? (
+              paginatedData.map(row => (
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}
                   onClick={() => handleDetailsOpen(row.original.name)}
                   className="cursor-pointer"
                 >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                  {/* @ts-expect-error: Expecting error */}
+                  {row.getVisibleCells().map((cell, index) => (
+                    <TableCell key={cell.id} className={index === row.getVisibleCells().length - 1 ? "text-right" : ""}>
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}
@@ -178,6 +186,12 @@ export function DataTable({ data }: { data: Color[] }) {
           </TableBody>
         </Table>
       </div>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        handlePreviousPage={handlePreviousPage}
+        handleNextPage={handleNextPage}
+      />
     </div>
   );
 }

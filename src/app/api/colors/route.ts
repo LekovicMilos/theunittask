@@ -1,4 +1,4 @@
-import { Color } from '@/components/organisms/data-table';
+import { Color } from '@/components/organisms/table/data-table';
 
 export async function GET(request: Request) {
   console.log(request);

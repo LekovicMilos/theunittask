@@ -23,13 +23,15 @@ type Color = {
   theme: string;
 };
 
+const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 const DetailsDialog: React.FC<DetailsDialogProps> = ({ open, onOpenChange, selectedColor }) => {
   const [data, setData] = React.useState<Color | null>(null);
   const [isLoading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     open &&
-      fetch(`http://localhost:3000/api/colors/${selectedColor}`, {
+      fetch(`${apiBaseUrl}/api/colors/${selectedColor}`, {
         method: 'GET',
         headers: {
           Accept: 'application/json',

@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button';
 import { useDispatch } from 'react-redux';
 import { removeColor } from '@/redux/slices/colorsSlice';
 import { toast } from '@/components/ui/use-toast';
-import { Color } from '@/components/organisms/data-table';
+import { Color } from '@/components/organisms/table/data-table';
 
 interface DeleteDialogProps {
   open: boolean;

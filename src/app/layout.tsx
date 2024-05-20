@@ -2,7 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import Header from '@/components/organisms/header';
+import Header from '@/components/organisms/layout/header';
 import { Toaster } from '@/components/ui/toaster';
 import Providers from '@/redux/Provider';
 

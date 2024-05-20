@@ -43,3 +43,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - Using Eslint and Prettier for code quality and consistency
 - Using @heroicons/react for icons
 - Using react-hook-form for forms
+- Client-side pagination

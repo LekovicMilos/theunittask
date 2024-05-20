@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Color } from '@/components/organisms/data-table';
+import { Color } from '@/components/organisms/table/data-table';
 const initialState: Color[] = [];
 
 const colorsSlice = createSlice({

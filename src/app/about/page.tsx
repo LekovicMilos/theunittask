@@ -22,6 +22,7 @@ export default function Page() {
         <li>Using Eslint and Prettier for code quality and consistency</li>
         <li>Using @heroicons/react for icons</li>
         <li>Using react-hook-form for forms</li>
+        <li>Client-side pagination</li>
       </div>
     </main>
   );

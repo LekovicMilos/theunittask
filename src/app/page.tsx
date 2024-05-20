@@ -1,9 +1,12 @@
 import React from 'react';
-import { DataTable } from '@/components/organisms/data-table';
+import { DataTable } from '@/components/organisms/table/data-table';
+
+const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export default async function Home() {
+  
   async function getColors() {
-    const response = await fetch(`http://localhost:3000/api/colors`, {
+    const response = await fetch(`${apiBaseUrl}/api/colors`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
