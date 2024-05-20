@@ -45,7 +45,7 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({ open, onOpenChange, deleteC
               Cancel
             </Button>
           </DialogClose>
-          <Button type="submit" onClick={onDelete} className="my-2">
+          <Button type="submit" data-testid="delete" onClick={onDelete} className="my-2">
             Delete
           </Button>
         </DialogFooter>

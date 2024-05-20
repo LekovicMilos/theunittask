@@ -85,6 +85,7 @@ export function DataTable({ data }: { data: Color[] }) {
           <Button
             variant="ghost"
             className="h-8 w-8 p-0"
+            data-testid="delete-button"
             onClick={(e) => handleDelete(e, row.original)}
           >
             <TrashIcon className="h-4 w-4" />
