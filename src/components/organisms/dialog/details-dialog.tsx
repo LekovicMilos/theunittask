@@ -45,14 +45,13 @@ const DetailsDialog: React.FC<DetailsDialogProps> = ({ open, onOpenChange, selec
         });
   }, [selectedColor, open]);
 
-  if (open && isLoading) return <p>Loading...</p>;
-  if (open && !data) return <p>No profile data</p>;
-
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[425px]">
+        {isLoading ? <p>Loading...</p> : null}
         <DialogHeader>
           <DialogTitle>Color details</DialogTitle>
+          {!data ? <p>No data</p> : null}
           <DialogDescription>
             <span className="text-md mb-2 mt-2 block">
               <span className="font-bold">Name:</span> {data?.name}

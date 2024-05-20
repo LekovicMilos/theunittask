@@ -28,7 +28,11 @@ pnpm dev
 bun dev
 ```
 
+Add .env.local file with content: NEXT_PUBLIC_API_BASE_URL=http://localhost:3000
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+Production url: https://theunittask.vercel.app/
 
 ## Features
 
