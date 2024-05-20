@@ -23,6 +23,7 @@ export default function Page() {
         <li>Using @heroicons/react for icons</li>
         <li>Using react-hook-form for forms</li>
         <li>Client-side pagination</li>
+        <li>Unit testing functionality</li>
       </div>
     </main>
   );
